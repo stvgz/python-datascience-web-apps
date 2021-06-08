@@ -1,8 +1,9 @@
 """
+Some models such as 
 A model with high precision
 """
 
-class Model():
+class Model_Regression():
 
     def __init__(self):
 
@@ -18,6 +19,6 @@ class Model():
 
 
 if __name__ == '__main__':
-    model = Model()
+    model = Model_Regression()
 
     print(model.predict(1))

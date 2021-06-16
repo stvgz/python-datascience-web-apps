@@ -2,4 +2,3 @@ dash
 plotly
 gradio
 streamlit
-pandas

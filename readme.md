@@ -12,6 +12,7 @@ Dash 8040
 Streamlit 8042
 Gradio 8044
 Bokeh 8046
+
 ## Comparison of them
 
 

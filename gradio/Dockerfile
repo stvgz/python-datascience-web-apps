@@ -9,4 +9,7 @@ COPY . .
 
 EXPOSE 7860
 
-CMD [ 'python', 'example_gradio_simple.py' ]
+CMD ["python", "example_gradio_slider.py" ]
+
+
+# docker build -t gradio . && docker run gradio -d

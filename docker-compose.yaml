@@ -1,0 +1,41 @@
+# docker compose up -d 
+version: '3.7'
+# network:
+  # host:
+services:
+  streamlit:
+    # hostname: streamlit
+    build: ./streamlit
+    container_name: streamlit
+    # dockerfile: Dockerfile not allowed
+    restart: always
+    network_mode: 'host' 
+    ports:
+      - "8042:8051"
+    # networks:
+      # - host
+    # entrypoint:
+    #   - streamlit
+  dash:
+    build: ./dash
+    container_name: dash
+    restart: always
+    network_mode: 'host' 
+    ports:
+      - "8040:8050"
+
+  gradio:
+    build: ./gradio
+    container_name: gradio
+    restart: always
+    network_mode: 'host'
+    ports:
+      - "8044:7860"
+
+  bokeh:
+    build: ./bokeh
+    container_name: bokeh
+    restart: always
+    network_mode: 'host'
+    ports:
+      - "8046:7860"

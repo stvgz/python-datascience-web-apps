@@ -7,9 +7,9 @@ RUN pip install -r requirements.txt -i https://pypi.tuna.tsinghua.edu.cn/simple
 
 COPY . .
 
-EXPOSE 8050
+EXPOSE 8051
 
-# CMD [ "python", "dash_example_finance.py" ]
-ENTRYPOINT [ "python", "dash_example_finance.py" ]
+# CMD ['streamlit run', 'example_streamlit_hello.py' ]
+ENTRYPOINT [ "streamlit", "run", "example_streamlit_hello.py" ]
 
-# docker build -t dash . && docker run dash -d
+# docker 

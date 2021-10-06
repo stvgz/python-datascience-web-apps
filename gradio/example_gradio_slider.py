@@ -20,5 +20,5 @@ if __name__=='__main__':
     f = gr.Interface(fn=predict,
                 inputs=[r],
                 outputs="text",
-                title='滑动条点击Submit')
+                title='滑动条点击 Move slider and press Submit')
     f.launch()

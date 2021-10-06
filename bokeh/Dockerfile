@@ -7,6 +7,9 @@ RUN pip install -r requirements.txt -i https://pypi.tuna.tsinghua.edu.cn/simple
 
 COPY . .
 
-EXPOSE 8051
+EXPOSE 7860
 
-CMD [ 'streamlit', 'example_streamlit_hello.py' ]
+CMD ["bokeh", "serve", "example_bokeh.py" ]
+
+
+# docker build -t bokeh . && docker run -d bokeh 

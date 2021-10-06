@@ -85,7 +85,7 @@ sidebar_list=[
         options=[
             {'label':'TESLA特斯拉','value':'TSLA'},
             {'label':'APPLE苹果公司','value':'AAPL'},
-            {'label':'AMAZON亚马逊','value':'AMZN'},
+            # {'label':'AMAZON亚马逊','value':'AMZN'},
         ],
     multi=False,
     value='AAPL' # default Value
@@ -120,10 +120,14 @@ content=[html.Div(
 
 app.layout = html.Div(content)
 
-def get_stock(stock_name,source='web',start='all',end='all'):
+def get_stock(stock_name,source='csv',start='all',end='all'):
     """
     Get stock values from local files or internet
     """
+
+    # base_dir = os.getcwd()
+    file_dir = os.path.abspath(__file__)
+    base_dir = os.path.dirname(file_dir)
 
     if source=='web':
         import pandas_datareader.data as web
@@ -135,7 +139,11 @@ def get_stock(stock_name,source='web',start='all',end='all'):
         df=web.get_data_yahoo(stock_name,start,end)
 
     elif source=='csv':
-        pass
+        if stock_name=="AAPL":
+            df = pd.read_csv(os.path.join(base_dir,'AAPL.csv'))
+        if stock_name =='TSLA':
+            df = pd.read_csv(os.path.join(base_dir,'TSLA.csv'))
+            # pass
     else:
         df=pd.DataFrame()
     return df
@@ -149,9 +157,14 @@ def update(n,stock_name):
     df=get_stock(stock_name=stock_name)
     df=df.reset_index()
 
+    df = df.rename(columns={'trade_date':'Date'})
+    # df['Date'] = pd.to_datetime(df['Date'])
+    df['Date'] = df['Date'].apply(lambda x: datetime.datetime.strptime(str(x),'%Y%m%d'))
+
+    df = df.head(360)
 
     fig=go.Figure()
-    fig.add_trace(go.Candlestick(x=df.Date,open=df.Open,close=df.Close,high=df.High,low=df.Low))
+    fig.add_trace(go.Candlestick(x=df.Date,open=df.open,close=df.close,high=df.high,low=df.low))
 
     fig.update_layout(height=600)
     # fig.add_trace()
